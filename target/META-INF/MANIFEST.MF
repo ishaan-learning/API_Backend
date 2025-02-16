@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.8.7
+Main-Class: com.example.backend.TestBackendServlet
+
