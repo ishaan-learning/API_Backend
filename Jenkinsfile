@@ -43,7 +43,7 @@ pipeline{
                 echo "running mv clean now:"
                 sh "mvn clean"
                 echo " checking if target dir is removed"
-                sh "ls -lrt API_Backend"
+                sh "ls -lrt"
             }
         }
         stage("maven package") {
