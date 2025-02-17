@@ -41,7 +41,7 @@ pipeline{
                 sh "pwd"
                 sh "ls -lrt"
                 echo "running mv clean now:"
-                sh "mvn -f API_Backend/clean"
+                sh "mvn clean"
                 echo " checking if target dir is removed"
                 sh "ls -lrt API_Backend"
             }
@@ -49,7 +49,7 @@ pipeline{
         stage("maven package") {
             steps{
                 echo "performing mvn build:"
-                sh "mvn -f API_Backend/pom.xml package"
+                sh "mvn package"
                 echo " checking if target dir is created"
                 sh "ls -lRt API_Backend"
             }
@@ -58,7 +58,7 @@ pipeline{
         stage("maven unit test") {
             steps {
             echo "performing unit test"
-            sh "mvn -f API_Backend/pom.xml test"
+            sh "mvn test"
                 
             }
         }
