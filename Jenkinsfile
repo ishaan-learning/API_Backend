@@ -51,7 +51,7 @@ pipeline{
                 echo "performing mvn build:"
                 sh "mvn package"
                 echo " checking if target dir is created"
-                sh "ls -lRt API_Backend"
+                sh "ls -lRt"
             }
         }
         
