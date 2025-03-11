@@ -4,6 +4,10 @@ pipeline{
         //install the maven version configured as 'm3' and add it to the path
         maven "M399"
     }
+    environment {
+        JFROG_URL = "http://10.128.0.3:8082"
+        JFROG_ACCESS_TOKEN = credentials('JFROG_ACCESS_TOKEN') // Fetch from Jenkins credentials
+    }
     stages {
         stage("Echo Version of Maven and git") {
             steps {
@@ -66,7 +70,7 @@ pipeline{
         stage("Pushing the packaged artifact to Artifactory(Jfrog)") {
             steps {
             echo "pushing the packaged artifact to Artifactory"
-            sh "jf rt upload --server-id=my-jfrog-server target/backendapi.war java-web-app/test_app_1/"
+            sh "jf rt upload target/backendapi.war java-web-app/test_app_1/  --url=$JFROG_URL --access-token=$JFROG_ACCESS_TOKEN"
             }
         }
         
