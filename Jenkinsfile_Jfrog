@@ -6,7 +6,6 @@ pipeline{
     }
     environment {
         JFROG_URL = "http://10.128.0.3:8082/artifactory"
-        JFROG_ACCESS_TOKEN = credentials('JFROG_ACCESS_TOKEN') // Fetch from Jenkins credentials
     }
     stages {
         stage("Echo Version of Maven and git") {
@@ -67,13 +66,17 @@ pipeline{
             }
         }
 
-        stage("Pushing the packaged artifact to Artifactory(Jfrog)") {
-            steps {
-            echo "pushing the packaged artifact to Artifactory"
-            sh "jf rt upload ./target/backendapi.war java-web-app/test_app_1/  --url=$JFROG_URL --access-token=$JFROG_ACCESS_TOKEN"
-            }
+       stage("Pushing the packaged artifact to Artifactory (JFrog)") {
+    steps {
+        withCredentials([string(credentialsId: 'JFROG_ACCESS_TOKEN', variable: 'TOKEN')]) {
+            echo "Pushing the packaged artifact to Artifactory"
+            sh '''
+                jfrog rt upload ./target/backendapi.war java-web-app/test_app_1/ \
+                --url=$JFROG_URL --access-token=$TOKEN
+            '''
         }
-        
+    }
+}
         
     }
 }
