@@ -71,7 +71,7 @@ pipeline{
         withCredentials([string(credentialsId: 'JFROG_ACCESS_TOKEN', variable: 'TOKEN')]) {
             echo "Pushing the packaged artifact to Artifactory"
             sh '''
-                jfrog rt upload ./target/backendapi.war java-web-app/test_app_1/ \
+                jf rt upload ./target/backendapi.war java-web-app/test_app_1/ \
                 --url=$JFROG_URL --access-token=$TOKEN
             '''
         }
