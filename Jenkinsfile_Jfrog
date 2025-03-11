@@ -65,7 +65,7 @@ pipeline{
 
         stage("Pushing the packaged artifact to Artifactory(Jfrog)") {
             steps {
-            echo "pushing the packaged artifact to Artifactory"\
+            echo "pushing the packaged artifact to Artifactory"
             sh "jf rt upload --server-id=my-jfrog-server target/backendapi.war java-web-app/test_app_1/"
             }
         }
